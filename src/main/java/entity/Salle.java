@@ -12,6 +12,8 @@ public class Salle {
     private int capacite;
     @ManyToOne
     private Reservation resevation;
+    @OneToMany(mappedBy = "salleconcernee")
+    private List<Materiel> materieldispo;
 
     public int getCapacite() {
         return capacite;

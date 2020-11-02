@@ -1,17 +1,17 @@
 package entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Materiel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @ManyToOne
+    private Salle salleconcernee;
     private String libelle;
     private int quantite;
+
 
     public Long getId() {
         return id;
@@ -35,6 +35,14 @@ public class Materiel {
 
     public void setQuantite(int quantite) {
         this.quantite = quantite;
+    }
+
+    public Salle getSalleconcernee() {
+        return salleconcernee;
+    }
+
+    public void setSalleconcernee(Salle salleconcernee) {
+        this.salleconcernee = salleconcernee;
     }
 
     public Materiel() {
