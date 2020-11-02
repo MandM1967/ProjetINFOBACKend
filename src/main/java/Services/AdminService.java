@@ -34,6 +34,7 @@ public class AdminService implements AdminServiceInterface {
 
     @Override
     public void delete(Admin admin) {
+        adminDao.delete(admin);
 
     }
 }
