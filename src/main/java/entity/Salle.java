@@ -15,6 +15,30 @@ public class Salle {
     @OneToMany(mappedBy = "salleconcernee")
     private List<Materiel> materieldispo;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Reservation getResevation() {
+        return resevation;
+    }
+
+    public void setResevation(Reservation resevation) {
+        this.resevation = resevation;
+    }
+
+    public List<Materiel> getMaterieldispo() {
+        return materieldispo;
+    }
+
+    public void setMaterieldispo(List<Materiel> materieldispo) {
+        this.materieldispo = materieldispo;
+    }
+
     public int getCapacite() {
         return capacite;
     }

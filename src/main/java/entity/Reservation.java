@@ -16,6 +16,31 @@ public class Reservation {
     private Date date_resevation;
     @ManyToOne
     private ResponsableDepatement responsableDepatement;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Salle> getSalles() {
+        return salles;
+    }
+
+    public void setSalles(List<Salle> salles) {
+        this.salles = salles;
+    }
+
+    public ResponsableDepatement getResponsableDepatement() {
+        return responsableDepatement;
+    }
+
+    public void setResponsableDepatement(ResponsableDepatement responsableDepatement) {
+        this.responsableDepatement = responsableDepatement;
+    }
+
     public int getCode_reservation() {
         return code_reservation;
     }
