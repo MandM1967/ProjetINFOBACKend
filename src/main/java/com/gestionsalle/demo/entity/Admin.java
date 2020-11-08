@@ -1,21 +1,22 @@
-package entity;
+package com.gestionsalle.demo.entity;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class ResponsableDepatement {
+@Table(uniqueConstraints= {@UniqueConstraint(columnNames = {"email"}), @UniqueConstraint(columnNames = {"login"})})
+public class Admin  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String email;
+    private String login;
     private String nom;
     private String prenom;
     private String numtel;
-    private String Password_responsabledepartement;
-    @OneToMany(mappedBy = "responsableDepatement")
+    private String passwordadmin;
+    @OneToMany(mappedBy = "admin")
     private List<Reservation> reservations;
-
 
     public Long getId() {
         return id;
@@ -31,6 +32,14 @@ public class ResponsableDepatement {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getNom() {
@@ -57,6 +66,14 @@ public class ResponsableDepatement {
         this.numtel = numtel;
     }
 
+    public String getPasswordadmin() {
+        return passwordadmin;
+    }
+
+    public void setPasswordadmin(String passwordadmin) {
+        this.passwordadmin = passwordadmin;
+    }
+
     public List<Reservation> getReservations() {
         return reservations;
     }
@@ -65,15 +82,7 @@ public class ResponsableDepatement {
         this.reservations = reservations;
     }
 
-    public ResponsableDepatement() {
-    }
-
-    public ResponsableDepatement(Long id, String email, String nom, String prenom, String numtel, List<Reservation> reservations) {
-        this.id = id;
-        this.email = email;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.numtel = numtel;
-        this.reservations = reservations;
+    public Admin() {
     }
 }
+

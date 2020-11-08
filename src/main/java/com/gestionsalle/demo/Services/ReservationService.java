@@ -1,13 +1,16 @@
-package Services;
+package com.gestionsalle.demo.Services;
 
-import DAO.MaterielDao;
-import DAO.ReservationDao;
-import entity.Reservation;
+import com.gestionsalle.demo.DAO.ReservationDao;
+import com.gestionsalle.demo.entity.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
-import serviceInterface.ReservationServiceInterface;
+import com.gestionsalle.demo.serviceInterface.ReservationServiceInterface;
+import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+@Service
 
 public class ReservationService implements ReservationServiceInterface {
     @Autowired
@@ -35,4 +38,19 @@ public class ReservationService implements ReservationServiceInterface {
         reservationDao.delete(reservation);
 
     }
+
+    @Override
+    public Reservation findbyNumresrvation(int numreservation) {
+        return reservationDao.findByNumreservation(numreservation);
+    }
+
+    @Override
+    public List<Reservation> findAllByDatereservation(Date datereservation) {
+        return reservationDao.findAllByDatereservation(datereservation);
+    }
+
+    public void deleteByNumresevation(int numreservation){
+        reservationDao.delete(findbyNumresrvation(numreservation));
+    }
+
 }

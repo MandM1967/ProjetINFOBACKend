@@ -1,12 +1,15 @@
-package Services;
+package com.gestionsalle.demo.Services;
 
-import DAO.SalleDao;
-import entity.Salle;
+import com.gestionsalle.demo.DAO.SalleDao;
+import com.gestionsalle.demo.entity.Salle;
 import org.springframework.beans.factory.annotation.Autowired;
-import serviceInterface.SalleServiceInterface;
+import com.gestionsalle.demo.serviceInterface.SalleServiceInterface;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+@Service
 
 public class SalleService implements SalleServiceInterface {
     @Autowired
@@ -23,10 +26,8 @@ public class SalleService implements SalleServiceInterface {
 
     @Override
     public int save(Salle salle) {
-        if(salle!=null){
             salleDao.save(salle);
-            return 0;
-        }else return 1;
+            return 1;
     }
 
     @Override
@@ -34,4 +35,21 @@ public class SalleService implements SalleServiceInterface {
         salleDao.delete(salle);
 
     }
+
+    @Override
+    public List<Salle> findByCapaciteGreaterThanEqual(Integer capacite) {
+        return salleDao.findByCapaciteGreaterThanEqual(capacite);
+    }
+
+    @Override
+    public Salle findByNumsalle(String numsalle) {
+        return salleDao.findByNumsalle(numsalle);
+    }
+
+
+
+
+
+
+
 }

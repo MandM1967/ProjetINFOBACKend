@@ -1,11 +1,10 @@
-package Services;
+package com.gestionsalle.demo.Services;
 
-import DAO.AdminDao;
-import DAO.MaterielDao;
-import entity.Materiel;
+import com.gestionsalle.demo.DAO.MaterielDao;
+import com.gestionsalle.demo.entity.Materiel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import serviceInterface.MaterielServiceInterface;
+import com.gestionsalle.demo.serviceInterface.MaterielServiceInterface;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,5 +36,10 @@ public class MaterielService implements MaterielServiceInterface {
     public void delete(Materiel materiel) {
         materielDao.delete(materiel);
 
+    }
+
+    @Override
+    public List<Materiel> findAllByLibelle(String libelle) {
+        return materielDao.findAllByLibelle(libelle);
     }
 }

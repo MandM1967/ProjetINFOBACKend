@@ -1,7 +1,7 @@
-package REST;
+package com.gestionsalle.demo.REST;
 
-import Services.MaterielService;
-import entity.Materiel;
+import com.gestionsalle.demo.Services.MaterielService;
+import com.gestionsalle.demo.entity.Materiel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Materiel")
+@RequestMapping("/GRDS/Materiel")
 
 public class MaterielRest {
 
@@ -34,6 +34,11 @@ public class MaterielRest {
     @DeleteMapping("/{materiel}")
     public void delete(@RequestBody Materiel materiel) {
         materielService.delete(materiel);
+    }
+
+    @GetMapping("/findAllByLibelle/{libelle}")
+    public  List<Materiel> findfindAllByLibelle(String libelle) {
+        return materielService.findAllByLibelle(libelle);
     }
 
 

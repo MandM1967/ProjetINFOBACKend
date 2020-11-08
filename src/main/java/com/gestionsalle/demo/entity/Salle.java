@@ -1,17 +1,18 @@
-package entity;
+package com.gestionsalle.demo.entity;
 
 import javax.persistence.*;
 import java.util.List;
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"numsalle"})})
 public class Salle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String num_salle;
-    private String emplacement_salle;
+    private String numsalle;
+    private String emplacementsalle;
     private int capacite;
     @ManyToOne
-    private Reservation resevation;
+    private Reservation reservation;
     @OneToMany(mappedBy = "salleconcernee")
     private List<Materiel> materieldispo;
 
@@ -23,12 +24,12 @@ public class Salle {
         this.id = id;
     }
 
-    public Reservation getResevation() {
-        return resevation;
+    public Reservation getReservation() {
+        return reservation;
     }
 
-    public void setResevation(Reservation resevation) {
-        this.resevation = resevation;
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 
     public List<Materiel> getMaterieldispo() {
@@ -47,21 +48,22 @@ public class Salle {
         this.capacite = capacite;
     }
 
-    public String getNum_salle() {
-        return num_salle;
+    public String getNumsalle() {
+        return numsalle;
     }
 
-    public void setNum_salle(String num_salle) {
-        this.num_salle = num_salle;
+    public void setNumsalle(String numsalle) {
+        this.numsalle = numsalle;
     }
 
-    public String getEmplacement_salle() {
-        return emplacement_salle;
+    public String getEmplacementsalle() {
+        return emplacementsalle;
     }
 
-    public void setEmplacement_salle(String emplacement_salle) {
-        this.emplacement_salle = emplacement_salle;
+    public void setEmplacementsalle(String emplacementsalle) {
+        this.emplacementsalle = emplacementsalle;
     }
+
 
 
 

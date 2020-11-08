@@ -1,4 +1,4 @@
-package entity;
+package com.gestionsalle.demo.entity;
 
 import javax.persistence.*;
 
@@ -44,6 +44,7 @@ public class Materiel {
     public void setSalleconcernee(Salle salleconcernee) {
         this.salleconcernee = salleconcernee;
     }
+
 
     public Materiel() {
     }
