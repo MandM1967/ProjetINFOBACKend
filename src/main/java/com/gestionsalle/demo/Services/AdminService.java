@@ -1,7 +1,10 @@
 package com.gestionsalle.demo.Services;
 
+import antlr.ASTNULLType;
 import com.gestionsalle.demo.DAO.AdminDao;
+import com.gestionsalle.demo.DAO.ResponsableDepartementDao;
 import com.gestionsalle.demo.entity.Admin;
+import com.gestionsalle.demo.entity.ResponsableDepartement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.gestionsalle.demo.serviceInterface.AdminServiceInterface;
@@ -11,8 +14,12 @@ import java.util.Optional;
 
 @Service
 public class AdminService implements AdminServiceInterface {
+
     @Autowired
     private AdminDao adminDao;
+
+    @Autowired
+    private ResponsableDepartementDao responsableDepartementDao ;
 
     @Override
     public Optional<Admin> findbyId(Long id) {
@@ -28,7 +35,7 @@ public class AdminService implements AdminServiceInterface {
     @Override
     public int save(Admin admin) {
 
-        if(admin!=null){
+        if(admin!=null ){
             adminDao.save(admin);
             return 0;
         }else return 1;
@@ -65,8 +72,17 @@ public class AdminService implements AdminServiceInterface {
         adminDao.findByLogin(login).setNumtel(numtel);
         adminDao.save(findByLogin(login));
     }
+    @Override
+    public void updatePasswordAdmin(String login, String passwordAdmin){
+        adminDao.findByLogin(login).setPasswordadmin(passwordAdmin);
+        adminDao.save(findByLogin(login)) ;
+    }
+
+    }
 
 
 
 
-}
+
+
+

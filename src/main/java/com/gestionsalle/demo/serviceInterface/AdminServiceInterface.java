@@ -1,6 +1,7 @@
 package com.gestionsalle.demo.serviceInterface;
 
 import com.gestionsalle.demo.entity.Admin;
+import com.gestionsalle.demo.entity.ResponsableDepartement;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,9 @@ public interface AdminServiceInterface {
     public void updateNomAdmin(String login, String nom);
     public void updatePrenomAdmin(String login, String prenom);
     public void updateNumtelAdmin(String login, String numtel);
+    public void updatePasswordAdmin(String login, String passwordAdmin);
+
+
 
 
 }

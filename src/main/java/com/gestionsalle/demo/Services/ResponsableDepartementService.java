@@ -4,6 +4,7 @@ import com.gestionsalle.demo.DAO.ResponsableDepartementDao;
 import com.gestionsalle.demo.entity.ResponsableDepartement;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.gestionsalle.demo.serviceInterface.ResponsableDepartementServiceInterface;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,9 +26,10 @@ public class ResponsableDepartementService implements ResponsableDepartementServ
     }
 
     @Override
-    public int save(ResponsableDepartement responsabledepatement) {
-        if(responsabledepatement!=null){
-            responsableDepartementDao.save(responsabledepatement);
+    public int save(ResponsableDepartement responsableDepartement) {
+
+        if(responsableDepartement!=null){
+            responsableDepartementDao.save(responsableDepartement);
             return 0;
         }else return 1;
     }
@@ -48,7 +50,50 @@ public class ResponsableDepartementService implements ResponsableDepartementServ
         return responsableDepartementDao.findByNomAndPrenom(nom, prenom);
     }
 
+    @Override
+    public void updateNomRD(String login, String nom) {
+        responsableDepartementDao.findByLogin(login).setNom(nom);
+        responsableDepartementDao.save(findByLogin(login));
+
+    }
+
+    @Override
+    public void updatePrenomRD(String login, String prenom) {
+        responsableDepartementDao.findByLogin(login).setPrenom(prenom);
+        responsableDepartementDao.save(findByLogin(login));
+
+    }
+
+    @Override
+    public void updateNumtelRD(String login, String numtel) {
+        responsableDepartementDao.findByLogin(login).setNumtel(numtel);
+        responsableDepartementDao.save(findByLogin(login));
+
+    }
+
+    @Override
+    public void updatePassworRD(String login, String passwordAdmin) {
+        responsableDepartementDao.findByLogin(login).setPasswordresponsabledepartement(passwordAdmin);
+        responsableDepartementDao.save(findByLogin(login)) ;
+
+    }
+
+    @Override
+    public ResponseEntity<ResponsableDepartement> updateResponsableDepatement(Long id, ResponsableDepartement responsableDepartement) {
+        Optional<ResponsableDepartement> ro1=findbyId(id);
+        ResponsableDepartement ro = ro1.get();
+        ro.setEmail(responsableDepartement.getEmail());
+        ro.setLogin(responsableDepartement.getLogin());
+        ro.setNom(responsableDepartement.getNom());
+        ro.setPrenom(responsableDepartement.getPrenom());
+        ro.setNumtel(responsableDepartement.getNumtel());
+        ro.setPasswordresponsabledepartement(responsableDepartement.getPasswordresponsabledepartement());
+        ResponsableDepartement updatedResposableDepartement= responsableDepartementDao.save(ro);
+        return ResponseEntity.ok(updatedResposableDepartement);
+    }
+
     public void deleteResponsableDepartementByLogin( String login){
          responsableDepartementDao.delete(findByLogin(login));
     }
+
 }

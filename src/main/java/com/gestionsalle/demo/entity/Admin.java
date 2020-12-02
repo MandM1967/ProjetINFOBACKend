@@ -1,7 +1,9 @@
 package com.gestionsalle.demo.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(uniqueConstraints= {@UniqueConstraint(columnNames = {"email"}), @UniqueConstraint(columnNames = {"login"})})
@@ -17,6 +19,10 @@ public class Admin  {
     private String passwordadmin;
     @OneToMany(mappedBy = "admin")
     private List<Reservation> reservations;
+    private boolean bloqued;
+    private int nbrTentativeRestant;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dateBloquage;
 
     public Long getId() {
         return id;
@@ -83,6 +89,30 @@ public class Admin  {
     }
 
     public Admin() {
+    }
+
+    public boolean isBloqued() {
+        return bloqued;
+    }
+
+    public void setBloqued(boolean bloqued) {
+        this.bloqued = bloqued;
+    }
+
+    public int getNbrTentativeRestant() {
+        return nbrTentativeRestant;
+    }
+
+    public void setNbrTentativeRestant(int nbrTentativeRestant) {
+        this.nbrTentativeRestant = nbrTentativeRestant;
+    }
+
+    public Date getDateBloquage() {
+        return dateBloquage;
+    }
+
+    public void setDateBloquage(Date dateBloquage) {
+        this.dateBloquage = dateBloquage;
     }
 }
 

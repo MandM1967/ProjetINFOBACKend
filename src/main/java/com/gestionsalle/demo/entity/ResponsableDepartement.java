@@ -2,6 +2,7 @@ package com.gestionsalle.demo.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(uniqueConstraints= {@UniqueConstraint(columnNames = {"email"}), @UniqueConstraint(columnNames = {"login"})})
@@ -14,10 +15,15 @@ public class ResponsableDepartement {
     private String login;
     private String nom;
     private String prenom;
+    private String departement;
     private String numtel;
     private String Passwordresponsabledepartement;
     @OneToMany(mappedBy = "responsableDepartement")
     private List<Reservation> reservations;
+
+    public ResponsableDepartement() {
+
+    }
 
     public String getLogin() {
         return login;
@@ -83,15 +89,36 @@ public class ResponsableDepartement {
         Passwordresponsabledepartement = passwordresponsabledepartement;
     }
 
-    public ResponsableDepartement() {
+    public ResponsableDepartement(String departement) {
+        this.departement = departement;
     }
 
-    public ResponsableDepartement(Long id, String email, String nom, String prenom, String numtel, List<Reservation> reservations) {
-        this.id = id;
-        this.email = email;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.numtel = numtel;
-        this.reservations = reservations;
+    public String getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(String departement) {
+        this.departement = departement;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ResponsableDepartement)) return false;
+        ResponsableDepartement that = (ResponsableDepartement) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(login, that.login) &&
+                Objects.equals(nom, that.nom) &&
+                Objects.equals(prenom, that.prenom) &&
+                Objects.equals(departement, that.departement) &&
+                Objects.equals(numtel, that.numtel) &&
+                Objects.equals(Passwordresponsabledepartement, that.Passwordresponsabledepartement) &&
+                Objects.equals(reservations, that.reservations);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, login, nom, prenom, departement, numtel, Passwordresponsabledepartement, reservations);
     }
 }
