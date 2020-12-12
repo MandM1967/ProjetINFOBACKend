@@ -1,20 +1,26 @@
 package com.gestionsalle.demo.REST;
 
+import com.gestionsalle.demo.DAO.SalleDao;
 import com.gestionsalle.demo.Services.SalleService;
+import com.gestionsalle.demo.entity.ResponsableDepartement;
 import com.gestionsalle.demo.entity.Salle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-
+@CrossOrigin(origins ="http://localhost:3001" )
 @RestController
 @RequestMapping("/GRDS/Salle")
 public class SalleRest {
 
     @Autowired
     private SalleService salleService;
-
+    @Autowired
+    private SalleDao salleDao;
     @GetMapping("/id/{id}")
     public Optional<Salle> findbyId(@PathVariable Long id) {
         return salleService.findbyId(id);
@@ -45,11 +51,14 @@ public class SalleRest {
         salleService.delete(salle);
     }
 
-    @DeleteMapping("/deleteSalleByNumsalle/{numsalle}")
-    public void deleteSalleByNumsalle(@PathVariable String numsalle){
-        salleService.delete(findByNumsalle(numsalle));
+    @DeleteMapping("/deleteSalleById/{id}")
+    public void deleteSalleByID(@PathVariable Long id){
+         salleService.deleteSalleByID(id);
     }
-
+    @PostMapping("/updateSalle/{id}")
+    public ResponseEntity<Salle> updateSalle(@PathVariable Long id, @RequestBody Salle salle){
+        return salleService.updateSalle(id,salle);
+    }
 
 
 

@@ -11,6 +11,6 @@ import java.util.List;
 public interface ReservationDao extends JpaRepository<Reservation,Long> {
 
     public Reservation findByNumreservation(int numreservation);
-    public List<Reservation> findAllByDatereservation(Date datereservation);
+
 
 }

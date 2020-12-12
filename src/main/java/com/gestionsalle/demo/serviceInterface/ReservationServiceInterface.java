@@ -12,5 +12,5 @@ public interface ReservationServiceInterface {
     public int save(Reservation reservation);
     public void delete(Reservation reservation);
     public Reservation findbyNumresrvation(int numreservation);
-    public List<Reservation> findAllByDatereservation(Date datereservation);
+
 }

@@ -9,12 +9,13 @@ public class Salle {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String numsalle;
+    private String typesalle;
     private String emplacementsalle;
     private int capacite;
     @ManyToOne
     private Reservation reservation;
-    @OneToMany(mappedBy = "salleconcernee")
-    private List<Materiel> materieldispo;
+    @OneToMany(mappedBy = "salleReservee")
+    private List<Reservation> reservations;
 
     public Long getId() {
         return id;
@@ -22,30 +23,6 @@ public class Salle {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Reservation getReservation() {
-        return reservation;
-    }
-
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
-    }
-
-    public List<Materiel> getMaterieldispo() {
-        return materieldispo;
-    }
-
-    public void setMaterieldispo(List<Materiel> materieldispo) {
-        this.materieldispo = materieldispo;
-    }
-
-    public int getCapacite() {
-        return capacite;
-    }
-
-    public void setCapacite(int capacite) {
-        this.capacite = capacite;
     }
 
     public String getNumsalle() {
@@ -56,6 +33,14 @@ public class Salle {
         this.numsalle = numsalle;
     }
 
+    public String getTypesalle() {
+        return typesalle;
+    }
+
+    public void setTypesalle(String typesalle) {
+        this.typesalle = typesalle;
+    }
+
     public String getEmplacementsalle() {
         return emplacementsalle;
     }
@@ -64,10 +49,30 @@ public class Salle {
         this.emplacementsalle = emplacementsalle;
     }
 
+    public int getCapacite() {
+        return capacite;
+    }
 
+    public void setCapacite(int capacite) {
+        this.capacite = capacite;
+    }
 
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
 
     public Salle() {
     }
-
 }

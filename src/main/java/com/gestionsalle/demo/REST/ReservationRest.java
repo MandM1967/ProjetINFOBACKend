@@ -5,11 +5,12 @@ import com.gestionsalle.demo.entity.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins ="http://localhost:3001" )
 @RequestMapping("/GRDS/Reservation")
 public class ReservationRest {
 
@@ -44,10 +45,7 @@ public class ReservationRest {
     public void deleteByNumreservation(@PathVariable int numreservation){
         reservationService.deleteByNumresevation(numreservation);
     }
-    @GetMapping("/findByDatereservation/datereservation")
-    public List<Reservation> findAllByDatereservation(@PathVariable Date datereservation){
-       return reservationService.findAllByDatereservation(datereservation);
-    }
+
 
 
 

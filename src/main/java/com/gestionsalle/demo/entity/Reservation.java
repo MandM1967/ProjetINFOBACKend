@@ -2,7 +2,7 @@ package com.gestionsalle.demo.entity;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+
 
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"numreservation"})})
@@ -11,13 +11,28 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int numreservation;
-    @OneToMany(mappedBy = "reservation")
-    private List<Salle> salles;
-    private Date datereservation;
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @ManyToOne
-    private ResponsableDepartement responsableDepartement;
+    private Salle salleReservee;
+    private Date dateDebut;
+    private Date dateFin;
+    private String responsableDepartement;
+    private String nomRD;
+    private String typesalle;
     @ManyToOne
     private Admin admin;
+
+    public Reservation() {
+    }
+
+
+    public String getResponsableDepartement() {
+        return responsableDepartement;
+    }
+
+    public void setResponsableDepartement(String responsableDepartement) {
+        this.responsableDepartement = responsableDepartement;
+    }
 
     public Long getId() {
         return id;
@@ -25,22 +40,6 @@ public class Reservation {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<Salle> getSalles() {
-        return salles;
-    }
-
-    public void setSalles(List<Salle> salles) {
-        this.salles = salles;
-    }
-
-    public ResponsableDepartement getResponsableDepatement() {
-        return responsableDepartement;
-    }
-
-    public void setResponsableDepatement(ResponsableDepartement responsableDepartement) {
-        this.responsableDepartement = responsableDepartement;
     }
 
     public int getNumreservation() {
@@ -51,20 +50,45 @@ public class Reservation {
         this.numreservation = numreservation;
     }
 
-    public Date getDatereservation() {
-        return datereservation;
+    public Salle getSalleReservee() {
+        return salleReservee;
     }
 
-    public void setDatereservation(Date datereservation) {
-        this.datereservation = datereservation;
+    public void setSalleReservee(Salle salleReservee) {
+        this.salleReservee = salleReservee;
     }
 
-    public ResponsableDepartement getResponsableDepartement() {
-        return responsableDepartement;
+
+    public Date getDateDebut() {
+        return dateDebut;
     }
 
-    public void setResponsableDepartement(ResponsableDepartement responsableDepartement) {
-        this.responsableDepartement = responsableDepartement;
+    public void setDateDebut(Date dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    public Date getDateFin() {
+        return dateFin;
+    }
+
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    public String getNomRD() {
+        return nomRD;
+    }
+
+    public void setNomRD(String nomRD) {
+        this.nomRD = nomRD;
+    }
+
+    public String getTypesalle() {
+        return typesalle;
+    }
+
+    public void setTypesalle(String typesalle) {
+        this.typesalle = typesalle;
     }
 
     public Admin getAdmin() {
@@ -73,8 +97,5 @@ public class Reservation {
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
-    }
-
-    public Reservation() {
     }
 }

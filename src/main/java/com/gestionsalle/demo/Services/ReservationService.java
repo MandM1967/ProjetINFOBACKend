@@ -44,10 +44,6 @@ public class ReservationService implements ReservationServiceInterface {
         return reservationDao.findByNumreservation(numreservation);
     }
 
-    @Override
-    public List<Reservation> findAllByDatereservation(Date datereservation) {
-        return reservationDao.findAllByDatereservation(datereservation);
-    }
 
     public void deleteByNumresevation(int numreservation){
         reservationDao.delete(findbyNumresrvation(numreservation));
