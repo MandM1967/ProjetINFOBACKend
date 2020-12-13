@@ -81,7 +81,8 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
                 .signWith(secretKey)
                 .compact();
-        response.addHeader("Access-Control-Allow-Origin","*");
-        response.addHeader(jwtConfig.getAuthorizationHeader() , " "+jwtConfig.getTokenPrefix()+ " " + token);
+       // response.addHeader("Access-Control-Allow-Origin","*");
+        response.addHeader("expires" , " "+jwtConfig.getTokenPrefix()+ " " + token);
+
     }
 }

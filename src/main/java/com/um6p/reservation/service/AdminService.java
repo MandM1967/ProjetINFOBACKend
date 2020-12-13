@@ -14,24 +14,31 @@ import java.util.List;
 public class AdminService {
     private final AdminDao adminDao;
     private final PasswordEncoder passwordEncoder;
+    private  final  SloteService sloteService;
 
     @Autowired
-    public AdminService(AdminDao adminDao, PasswordEncoder passwordEncoder) {
+    public AdminService(AdminDao adminDao, PasswordEncoder passwordEncoder, SloteService sloteService) {
         this.adminDao = adminDao;
         this.passwordEncoder = passwordEncoder;
+        this.sloteService = sloteService;
     }
 
     public UserDetails loadUserByUserName(String s) {
         return adminDao.getAdminByUserName(s);
     }
 
-    public Admin getAdmin(String username) {
-        return adminDao.getAdminByUserName(username);
+    public Admin getAdmin(String username)
+    {
+        Admin admin = adminDao.getAdminByUserName(username);
+        admin.setSlots(sloteService.getSlotByUserName(username));
+        return admin;
     }
 
     public int deleteAccount(String userName)
     {
-        return adminDao.deleteAdminById(userName);
+        adminDao.deleteAdminById(userName);
+        sloteService.unsubscribeByUserName(userName);
+        return 1;
     }
     public int insertAdmin(Admin admin) throws SQLException {
         return adminDao.insertAdmin(admin);
@@ -48,6 +55,8 @@ public class AdminService {
     }
     public List<Admin> getAllAdmins()
     {
-        return adminDao.getAllAdmin();
+        List<Admin> admins = adminDao.getAllAdmin();
+        admins.forEach(a -> a.setSlots(sloteService.getSlotByUserName(a.getUserName())));
+        return admins;
     }
 }

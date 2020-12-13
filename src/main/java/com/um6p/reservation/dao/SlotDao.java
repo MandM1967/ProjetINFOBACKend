@@ -15,10 +15,16 @@ public interface SlotDao {
     boolean IsReserved( UUID id);
 
     int reserveSlotById(String userName, UUID id);
+    int unsubscribeById(UUID id);
+    int unsubscribeByUserName(String username);
 
     Slot getSlotById(UUID id);
 
     List<Slot> getSlotBySalleId(UUID salleId);
 
     List<Slot> getSlotByUserName(String userName);
+    int countSlots(UUID salleId);
+
+    int deleteSloteBySalleId(UUID id);
+
 }

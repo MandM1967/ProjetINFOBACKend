@@ -14,11 +14,13 @@ import java.util.List;
 public class UserService {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
+    private  final SloteService sloteService;
 
     @Autowired
-    public UserService(UserDao userDao, PasswordEncoder passwordEncoder) {
+    public UserService(UserDao userDao, PasswordEncoder passwordEncoder, SloteService sloteService) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+        this.sloteService = sloteService;
     }
 
     public UserDetails loadUserByUserName(String s) {
@@ -38,15 +40,20 @@ public class UserService {
     }
     public User getUserByUserName(String userName)
     {
-        return userDao.getUserByUserName(userName);
+        User user = userDao.getUserByUserName(userName);
+        user.setSlots(sloteService.getSlotByUserName(userName));
+        return user;
     }
     public List<User> getAllUser()
     {
-        return userDao.getAllUsers();
+        List<User> users = userDao.getAllUsers();
+        users.forEach(u ->u.setSlots(sloteService.getSlotByUserName(u.getUserName())));
+        return users;
     }
 
 
     public int deleteUser(String username) {
+        sloteService.unsubscribeByUserName(username);
         return userDao.deleteUser(username);
     }
 }

@@ -16,7 +16,7 @@ public class UserRowMapper implements RowMapper<User> {
                 resultSet.getString("lastname"),
                 resultSet.getString("email"),
                 Department.valueOf(resultSet.getString("department")),
-                resultSet.getString("username"),
+                resultSet.getString("phonenumber"),
                 resultSet.getString("password"),
                 resultSet.getString("username"),
                 new ArrayList<>());

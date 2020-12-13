@@ -1,13 +1,15 @@
 package com.um6p.reservation.dao;
 
+import com.um6p.reservation.Roles.SalleRowMapper;
 import com.um6p.reservation.models.Salle;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 
+@Repository
 public class SalleDataAccess implements SalleDao {
     private final JdbcTemplate jdbcTemplate;
 
@@ -20,7 +22,7 @@ public class SalleDataAccess implements SalleDao {
         String sql = "insert into salle values(?,?,?,?,?)";
 
         return jdbcTemplate.update(sql,
-                salle.getId().toString(),
+                salle.getId(),
                 salle.getNumSalle(),
                 salle.getSalleType(),
                 salle.getCapacite(),
@@ -30,13 +32,13 @@ public class SalleDataAccess implements SalleDao {
     @Override
     public int updateSalleById(UUID id, Salle salle) {
         String sql = "update salle set numsalle = ?, salletype=?,capacite = ? where id = ?";
-        return jdbcTemplate.update(sql, salle.getNumSalle(), salle.getSalleType(), salle.getCapacite(), id.toString());
+        return jdbcTemplate.update(sql, salle.getNumSalle(), salle.getSalleType(), salle.getCapacite(), id);
     }
 
     @Override
     public int deleteSalleById(UUID id) {
         String sql = "delete from salle where id =?";
-        return jdbcTemplate.update(sql, id.toString());
+        return jdbcTemplate.update(sql, id);
     }
 
     @Override
@@ -49,5 +51,17 @@ public class SalleDataAccess implements SalleDao {
     public int increaseRate(double in, UUID salleId) {
         String sql = "update salle set rate = rate + ? where id=?";
         return jdbcTemplate.update(sql, in, salleId);
+    }
+
+    @Override
+    public List<Salle> getAll() {
+        String sql = "select * from salle ";
+        return jdbcTemplate.query(sql, new SalleRowMapper());
+    }
+
+    @Override
+    public Salle getSalleById(UUID id) {
+        String sql = "select * from salle where id = ?";
+        return jdbcTemplate.queryForObject(sql, new SalleRowMapper(), id);
     }
 }

@@ -3,6 +3,7 @@ package com.um6p.reservation.dao;
 
 import com.um6p.reservation.models.Salle;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface SalleDao {
@@ -15,6 +16,9 @@ public interface SalleDao {
     int resetRates();
 
     int increaseRate(double in, UUID salleId);
+
+    List<Salle> getAll();
+    Salle getSalleById(UUID id);
 
 
 }
