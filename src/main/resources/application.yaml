@@ -1,0 +1,12 @@
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/reservation
+    username: postgres
+    password: "8ce8443c-165c-11eb-adc1-0242ac120002"
+    pool-size: 50
+
+application:
+  jwt:
+    secretKey: 8ce8443c-165c-11eb-adc1-0242ac120002-6ed3c662-f2d96ed3c662-f2d9-414a-a9ff-9244dd3f700e-414a-a9ff-9244dd3f700e-
+    tokenPrefix: Bearer
+    tokenExpirationAfterDays: 30

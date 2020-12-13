@@ -1,0 +1,11 @@
+version: "3"
+services:
+  psql:
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=8ce8443c-165c-11eb-adc1-0242ac120002
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=reservation
+    image: postgres:latest
+    ports:
+      - "5432:5432"
