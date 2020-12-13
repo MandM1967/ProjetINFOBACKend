@@ -8,10 +8,16 @@ import java.util.UUID;
 
 public interface UserDao {
     int insertUser(User user) throws SQLException;
+
     int updateUser(User user);
+
     int updatePassword(String userName, String newPassword);
+
     User getUserById(UUID id);
+
     User getUserByUserName(String userName);
+
     List<User> getAllUsers();
+
     int deleteUser(String username);
 }

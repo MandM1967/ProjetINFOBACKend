@@ -7,10 +7,14 @@ import java.util.UUID;
 
 public interface SalleDao {
     int insertSalle(Salle salle);
-    int updateSalleById(UUID id , Salle salle);
+
+    int updateSalleById(UUID id, Salle salle);
+
     int deleteSalleById(UUID id);
+
     int resetRates();
 
+    int increaseRate(double in, UUID salleId);
 
 
 }

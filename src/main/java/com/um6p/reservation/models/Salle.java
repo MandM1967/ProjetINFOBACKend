@@ -13,7 +13,7 @@ public class Salle {
     private final int capacite;
     private final double rate;
 
-    private final List<Slot> slots;
+    private  List<Slot> slots;
 
     public Salle(UUID id, String numSalle, String salleType, int capacite, double rate, List<Slot> slots) {
         this.id = id;
@@ -35,5 +35,33 @@ public class Salle {
         this.capacite = capacite;
         this.id = UUID.randomUUID();
         slots = new ArrayList<>();
+    }
+
+    public void setSlots(List<Slot> slots) {
+        this.slots = slots;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getNumSalle() {
+        return numSalle;
+    }
+
+    public String getSalleType() {
+        return salleType;
+    }
+
+    public int getCapacite() {
+        return capacite;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public List<Slot> getSlots() {
+        return slots;
     }
 }

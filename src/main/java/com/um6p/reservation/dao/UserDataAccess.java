@@ -1,10 +1,9 @@
 package com.um6p.reservation.dao;
 
 import com.um6p.reservation.models.User;
-import com.um6p.reservation.rowmappers.AdminRowMapper;
 import com.um6p.reservation.rowmappers.UserRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
@@ -12,10 +11,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class UserDataAccess implements UserDao{
-   private final  JdbcTemplate jdbcTemplate;
+public class UserDataAccess implements UserDao {
+    private final JdbcTemplate jdbcTemplate;
 
-   @Autowired
+    @Autowired
     public UserDataAccess(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -23,7 +22,7 @@ public class UserDataAccess implements UserDao{
     @Override
     public int insertUser(User user) throws SQLException {
         String sql = " insert into ruser values(?,?,?,?,?,?,?)";
-        return  jdbcTemplate.update(sql,
+        return jdbcTemplate.update(sql,
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
@@ -49,7 +48,7 @@ public class UserDataAccess implements UserDao{
     public int updatePassword(String userName, String newPassword) {
         String sql = "update ruser set password = ? where username = ?";
 
-        return jdbcTemplate.update(sql , newPassword, userName);
+        return jdbcTemplate.update(sql, newPassword, userName);
     }
 
     @Override
@@ -60,19 +59,19 @@ public class UserDataAccess implements UserDao{
     @Override
     public User getUserByUserName(String userName) {
         String sql = "select * from ruser where username = ?";
-        return jdbcTemplate.queryForObject(sql,new UserRowMapper(),userName);
+        return jdbcTemplate.queryForObject(sql, new UserRowMapper(), userName);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return jdbcTemplate.query("select * from ruser",new UserRowMapper());
+        return jdbcTemplate.query("select * from ruser", new UserRowMapper());
 
     }
 
     @Override
     public int deleteUser(String username) {
-       String sql = "delete from ruser where username =?";
+        String sql = "delete from ruser where username =?";
 
-        return jdbcTemplate.update(sql,username);
+        return jdbcTemplate.update(sql, username);
     }
 }

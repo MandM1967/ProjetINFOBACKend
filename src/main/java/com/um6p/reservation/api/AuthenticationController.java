@@ -16,7 +16,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin("*")
+
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
