@@ -9,6 +9,7 @@ import io.jsonwebtoken.Jwts;
 import org.assertj.core.util.Strings;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -61,17 +62,18 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
             String username = body.getSubject();
 
             List<Map<String, String>> authorities =((List<Map<String, String>>) body.get("authorities"));
-
+            System.out.println(authorities.toString());
             Set<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream()
                     .map(m -> new SimpleGrantedAuthority(m.get("authority")))
                     .collect(Collectors.toSet());
+            System.out.println(simpleGrantedAuthorities.toString());
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(
                     username,
                     null,
                     simpleGrantedAuthorities
             );
-            System.out.println("username");
+            System.out.println(username );
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
         } catch (JwtException e) {

@@ -68,4 +68,11 @@ public class UserDataAccess implements UserDao{
         return jdbcTemplate.query("select * from ruser",new UserRowMapper());
 
     }
+
+    @Override
+    public int deleteUser(String username) {
+       String sql = "delete from ruser where username =?";
+
+        return jdbcTemplate.update(sql,username);
+    }
 }

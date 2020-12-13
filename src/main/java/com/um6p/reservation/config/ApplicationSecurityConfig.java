@@ -21,12 +21,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.crypto.SecretKey;
 
+import static com.um6p.reservation.Roles.ApplicationUserPermission.ADDUSER;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        prePostEnabled = true,
-        securedEnabled = true,
-        jsr250Enabled = true)
+        prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationService authenticationService;
@@ -69,6 +69,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 )
                 .addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig),JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
+                .antMatchers(HttpMethod.POST,"/api/auth/user").hasAuthority("user:add")
+                .antMatchers(HttpMethod.GET,"/api/user/getall").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET,"/api/user/delete/**").hasRole("ADMIN")
+                .antMatchers("/api/admin/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT,"/api/user/update").hasRole("USER")
+                .antMatchers(HttpMethod.PUT,"/api/user/updatepassword").hasRole("USER")
                 .anyRequest()
                 .authenticated();
     }

@@ -4,6 +4,7 @@ import com.um6p.reservation.models.Admin;
 import com.um6p.reservation.models.User;
 import com.um6p.reservation.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
@@ -19,8 +20,9 @@ import java.util.Locale;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
+
     @Autowired
-    public AuthenticationController(AuthenticationService authenticationService) {
+    public AuthenticationController( AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
@@ -31,6 +33,7 @@ public class AuthenticationController {
     private ResponseEntity singUpAdmin(@RequestBody Admin admin)
     {
         try{
+
             authenticationService.signUpAdmin(admin);
         }catch (Exception e)
         {
@@ -45,7 +48,6 @@ public class AuthenticationController {
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
 
-    @PreAuthorize("hasAuthority('adduser')")
     private ResponseEntity signUpUser(@RequestBody User user)
     {
         try{

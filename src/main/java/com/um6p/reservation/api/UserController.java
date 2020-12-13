@@ -38,7 +38,18 @@ public class UserController {
         }
         return ResponseEntity.ok().body(u);
     }
-
+    @DeleteMapping(value = "/delete/{username}")
+    private ResponseEntity deleteUser(@PathVariable("username") String username)
+    {
+        try {
+            userService.deleteUser(username);
+            return ResponseEntity.ok().build();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return ResponseEntity.badRequest().build();
+    }
     @PutMapping(
             value = "/updatepassword"
     )

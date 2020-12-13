@@ -1,9 +1,9 @@
 package com.um6p.reservation.Roles;
 
 public enum ApplicationUserPermission {
-    READ("read"),
-    RESERVE("reserve"),
-    ADDUSER("adduser");
+    READ("user:read"),
+    RESERVE("slot:reserve"),
+    ADDUSER("user:add");
 
 
 
