@@ -28,8 +28,7 @@ public class SloteService {
         long timeStampMillis = now.toDate().getTime() /1000;
         slotDao.deleteSlotBefore(timeStampMillis);
 
-        LocalDate monday = now.plus(Period.ZERO.withDays(7)).withDayOfWeek(DateTimeConstants.MONDAY);
-        long endTime = monday.toDate().getTime() /1000;
+        long endTime = timeStampMillis + 604800;
         System.out.println(endTime);
         long end = timeStampMillis + 7200;
         Slot slot ;
@@ -59,7 +58,7 @@ public class SloteService {
         Slot slot = getSlotById(id);
         if (!slot.isResesrved())
         {
-            int nbSlot = countSlots(slot.getSalleID());
+            int nbSlot = 84;
             salleService.increaseRate(1/nbSlot,slot.getSalleID());
             slotDao.reserveSlotById(userName,id);
             return  0;
@@ -85,7 +84,7 @@ public class SloteService {
 
     public  int unsubscribeById(UUID id){
         Slot slot = getSlotById(id);
-        int nbSlot = countSlots(slot.getSalleID());
+        int nbSlot = 84;
         salleService.increaseRate( - (1/nbSlot),slot.getSalleID());
         return slotDao.unsubscribeById(id);
     }

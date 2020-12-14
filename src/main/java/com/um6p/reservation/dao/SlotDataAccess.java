@@ -62,14 +62,14 @@ public class SlotDataAccess implements SlotDao
 
     @Override
     public int unsubscribeById(UUID id) {
-        String sql = "update slot set isreserved = ? where id =?";
-        return jdbcTemplate.update(sql,  false, id);
+        String sql = "update slot set isreserved = ? ,username = ? where id =?";
+        return jdbcTemplate.update(sql,  false,"", id);
     }
 
     @Override
     public int unsubscribeByUserName(String username) {
-        String sql = "update slot set isreserved = ? where username =?";
-        return jdbcTemplate.update(sql,  false,username);
+        String sql = "update slot set isreserved = ?,username = ? where username =?";
+        return jdbcTemplate.update(sql,  false,"",username);
     }
 
     @Override
